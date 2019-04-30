@@ -1,2 +1,1 @@
- VUT FIT BIT School Projects
-Author: Ondrej Šajdík
+ VUT FIT BIT School Projects by Ondrej Šajdík
