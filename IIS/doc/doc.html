@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html><link type="text/css" id="dark-mode" rel="stylesheet" href=""><style type="text/css" id="dark-mode-custom-style"></style><head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2">
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<h1>3. Sport: správa turnajů, registrace hráčů a zadávání výsledků</h1> 
+
+<dl>
+	<dt>Autoři</dt>
+	<dd>Hampl Tomáš
+	    <a href="mailto:xhampl10@stud.fit.vutbr.cz">xhampl10@stud.fit.vutbr.cz</a> -
+		člen
+	</dd>
+	<dd>Šajdík Ondrej
+	    <a href="mailto:xsajdi01@stud.fit.vutbr.cz">xsajdi01@stud.fit.vutbr.cz</a> - 
+		vedoucí
+	</dd>
+  <dd>Trněný Matěj
+	    <a href="mailto:xtrnen02@stud.fit.vutbr.cz">xtrnen02@stud.fit.vutbr.cz</a> - 
+		člen
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="http://165.22.22.33/">http://165.22.22.33/</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<table>
+<tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin@mail.com</td><td>admin123</td><td>Administrátor</td></tr>
+<tr><td>jenkins.wright@mail.com</td><td>Joy123</td><td>Organizátor turnamentu "Sunday Solo Cup"</td></tr>
+<tr><td>marcello.walker@mail.com</td><td>Marc123</td><td>Rozhodčí turnamentu "Clash of Titans"</td></tr>
+<tr><td>gordon.burke@mail.com</td><td>Titan123</td><td>Zakladatel teamu "Team of Titans"</td></tr>
+<tr><td>donald.ortiz@mail.com</td><td>Cheese123</td><td>Člen teamu "Team of Titans"</td></tr>
+</tbody></table>
+
+<h3>Use case</h3>
+<img src="IIS_use_case.png"></img>
+
+<h2>Implementace</h2>
+<h3>Použité technologie</h3>
+<p>PHP 7.2, MySQL (SQL), framework Laravel, Composer, HTML, CSS</p>
+<h3>Autentizace</h3>
+<p>Vytvořená pomocí Laravelu. (php artisan make:auth)</p>
+<p>Stárá se jak o registraci a přihlašování, tak i o znovuzískání hesla.</p>
+<h3>MatchController.php</h3>
+<p>Kontroler spravuje stránku zápasu.</p>
+<p>Zobrazuje konkrétního stránku zápasu, vytváří nové zápasy, aktualizuje zápasy při změně (zadávání výsledků) a maže zápasy.</p>
+<h3>ProfileController.php</h3>
+<p>Kontroler spravuje uživatele.</p>
+<p>Smazání uživatele (admin má práva), úprávu informací uživatele.</p>
+<h3>SearchController.php</h3>
+<p>Kontroler spravuje vyhledávací stránku.</p>
+<p>Ukazuje všechny výsledky vyhledávání pro hráče, týmy a turnaje.</p>
+<h3>TeamController.php</h3>
+<p>Kontroler spravuje stránku týmů.</p>
+<p>Zobrazuje konkrétní stránku týmu, vytváří týmy, maže týmy a edituje týmy (změna loga, povýšení hráče na vlastníka, opustit tým, přidat člena, vyhodit člena).</p>
+<h3>TournamentController.php</h3>
+<p>Kontroler spravuje stránku všech turnajů a stránku jednotlivých turnajů.</p>
+<p>Na stránce všech turnajů je zobrazuje.</p>
+<p>Vytváří a edituje turnaje a obstarává všechny akce pro uživatele jako jsou: vstoupit do turnaje, opustit turnaj, stát se rozhodčím, opustit turnaj jako rozhodčí, přidat a odebrat sponzora, vyhodit rozhočího, vyhodit tým a generuje zápasy spolu s pavoukem.</p>
+
+<h3>Databáze</h3>
+
+<h3>ERD</h3>
+<img src="IIS_ERD.png"></img>
+
+<h2>Instalace</h2>
+
+Stručně popište: 
+<ul>
+<li>Jako host jsme zvolili <a href="http://www.digitalocean.com">digitalocean.com</a>, což je cloudový hosting.</li>
+<li>Server je Ubuntu LAMP 18.04.</li>
+<li>Požadavky: PHP >= 7.2.0, BCMath, Ctype, JSON, Mbstring, OpenSSL, PDO, Tokenizer, XML (PHP extensions), Composer, MySQL, Apache (pro slibnou URL, na serveru běží Apache2)</li>
+<li>Pro správné fungování databáze je nejlepší v MySql prvně vytvořit databázi samotnou. 
+Následně vytvořit účet pro přístup aplikace a nastavit pravomoce. 
+Dále je nutné zadat dané údaje do .env souboru, aby aplikace mohla přistupovat k databázi. 
+Při úspěchu databázi vygenerujete příkazem "php artisan migrate" a naplníte "php artisan db:seed".</li>
+</ul>
+
+<h2>Známe problémy</h2>
+<p>V prohlížeči Mozila Firefox není podporovaný &#8222;datetime-local&#8221; typ inputu. Takže při výběru hodnoty se tu nenachází kalendář a tudíž formát vstupu není ošetřený.</p>
+
+</body></html>
